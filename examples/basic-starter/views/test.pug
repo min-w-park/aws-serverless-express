@@ -1,0 +1,83 @@
+doctype html
+html
+    head
+        title Procurement Report
+        style.
+            body {
+                background: rgb(204,204,204); 
+            }
+            page {
+                background: white;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+                width: 29.7cm;
+                height: 21cm;
+            }
+            h1 {
+                text-align: center;
+            }
+            .resources > h2 {
+                margin-bottom: 0;
+            }
+            .resource > h3, .resource > p {
+                display: inline-block;
+                margin-bottom: 0.5rem;
+            }
+            .resource > code {
+                display: block;
+                background-color: #eff0f1;
+                color: #393318;
+                padding: 5px;
+                font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,sans-serif;
+                white-space: nowrap;
+                overflow-x: auto;
+            }
+            .enoc-logo {
+                display: block;
+                width: 10rem;
+                margin: auto;
+            }
+            form {
+                margin-bottom: 1rem;
+            }
+            .form-group {
+                padding-bottom: 1rem;
+            }
+            label {
+                display: block;
+            }
+            header {
+                height: 3.5cm;
+                width: 29.7cm;
+            }
+            #logo_image {
+                height: 1.65cm;
+                width: 4.2cm;
+                float: left;
+            }
+            #mark {
+                float: right;
+            }
+    page
+        body
+            header
+                div#logo_image
+                    img.enoc-logo(src='enoc')
+                div#mark
+                    h1 EY17
+            main
+                h1 My Serverless Application
+            footer
+                div
+                    h1 Enernoc copyrights
+    //- p
+    //-   | Welcome to your AWS serverless application. This example application has several resources configured for you to explore. State is stored in memory in a given container, and is therfore ephemeral - see 
+    //-   a(href='https://aws.amazon.com/blogs/compute/container-reuse-in-lambda/', target='_blank') Understanding Container Reuse in AWS Lambda
+    //-   | &nbsp;for more information.
+    
+    
+
+            
+          

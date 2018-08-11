@@ -13,7 +13,7 @@ app.set('view engine', 'pug')
 if (process.env.NODE_ENV === 'test') {
   // NOTE: aws-serverless-express uses this app for its integration tests
   // and only applies compression to the /sam endpoint during testing.
-  router.use('/sam', compression())
+  router.use('/enoc', compression())
 } else {
   router.use(compression())
 }
@@ -27,13 +27,14 @@ router.use(awsServerlessExpressMiddleware.eventContext())
 app.set('views', path.join(__dirname, 'views'))
 
 router.get('/', (req, res) => {
-  res.render('index', {
+  res.render('test', {
+  // res.render('index', {
     apiUrl: req.apiGateway ? `https://${req.apiGateway.event.headers.Host}/${req.apiGateway.event.requestContext.stage}` : 'http://localhost:3000'
   })
 })
 
-router.get('/sam', (req, res) => {
-  res.sendFile(`${__dirname}/sam-logo.png`)
+router.get('/enoc', (req, res) => {
+  res.sendFile(`${__dirname}/enoc-logo.png`)
 })
 
 router.get('/users', (req, res) => {
@@ -41,6 +42,14 @@ router.get('/users', (req, res) => {
 })
 
 router.get('/users/:userId', (req, res) => {
+  const user = getUser(req.params.userId)
+
+  if (!user) return res.status(404).json({})
+
+  return res.json(user)
+})
+
+router.get('/users/:userId/phone', (req, res) => {
   const user = getUser(req.params.userId)
 
   if (!user) return res.status(404).json({})
@@ -77,14 +86,17 @@ router.delete('/users/:userId', (req, res) => {
 
 const getUser = (userId) => users.find(u => u.id === parseInt(userId))
 const getUserIndex = (userId) => users.findIndex(u => u.id === parseInt(userId))
+const getUserPhone = (userId) => users.find(u => u.phone === parseInt(userId))
 
 // Ephemeral in-memory data store
 const users = [{
   id: 1,
-  name: 'Joe'
+  name: 'Joe',
+  phone: '010-3571-0975'
 }, {
   id: 2,
-  name: 'Jane'
+  name: 'Jane',
+  phone: '010-1234-5566'
 }]
 let userIdCounter = users.length
 
